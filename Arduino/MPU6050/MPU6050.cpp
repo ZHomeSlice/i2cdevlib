@@ -3260,6 +3260,7 @@ void MPU6050::PID(uint8_t ReadAddress, float kP,float kI, uint8_t Loops){
 	Serial.write('>');
 	for (int i = 0; i < 3; i++) {
 		I2Cdev::readWords(devAddr, SaveAddress + (i * shift), 1, &Data); // reads 1 or more 16 bit integers (Word)
+		Reading = Data;// Convert int to float;
 		if(SaveAddress != 0x13){
 			BitZero[i] = Data & 1;										 // Capture Bit Zero to properly handle Accelerometer calibration
 			ITerm[i] = ((float)Reading) * 8;
